@@ -1,0 +1,37 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  category: string;
+  description: string;
+  image: ImageMetadata;
+  alt: string;
+  badge?: string;
+}
+
+const { title, category, description, image, alt, badge } = Astro.props;
+---
+
+<article class="surface-card group overflow-hidden p-3">
+  <div class="overflow-hidden rounded-[1.5rem] [&_img]:aspect-[4/4.6] [&_img]:h-full [&_img]:w-full [&_img]:object-cover [&_img]:transition [&_img]:duration-500 group-hover:[&_img]:scale-[1.03]">
+    <Picture
+      src={image}
+      alt={alt}
+      formats={["avif", "webp"]}
+      widths={[480, 720, 960]}
+      sizes="(min-width: 1280px) 24vw, (min-width: 768px) 50vw, 100vw"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="px-3 pb-3 pt-5">
+    <div class="flex items-center gap-3">
+      <p class="text-xs font-semibold uppercase tracking-[0.24em] text-bronze-500">{category}</p>
+      {badge && <span class="rounded-full bg-bronze-400/10 px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-bronze-500">{badge}</span>}
+    </div>
+    <h3 class="mt-3 font-display text-3xl text-stone-950">{title}</h3>
+    <p class="mt-3 text-sm leading-7 text-stone-600">{description}</p>
+  </div>
+</article>

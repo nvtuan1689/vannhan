@@ -1,0 +1,107 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { MaterialItem } from '../data/homepage';
+
+interface Props {
+  materials: MaterialItem[];
+  applications: string[];
+  craftsmanshipHighlights: string[];
+  primaryImage: ImageMetadata;
+  primaryAlt: string;
+  secondaryImage: ImageMetadata;
+  secondaryAlt: string;
+}
+
+const {
+  materials,
+  applications,
+  craftsmanshipHighlights,
+  primaryImage,
+  primaryAlt,
+  secondaryImage,
+  secondaryAlt,
+} = Astro.props;
+---
+
+<section id="chat-lieu" class="section-space">
+  <div class="section-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+    <div class="space-y-6">
+      <span class="eyebrow">Chất liệu & tay nghề</span>
+      <h2 class="section-title max-w-2xl !mt-4 text-4xl sm:text-5xl">Nhiều chất liệu, một chuẩn hoàn thiện premium.</h2>
+      <p class="section-copy max-w-xl !mt-4">
+        Từ composite resin, đồng, đá đến gỗ, mỗi lựa chọn đều được cân nhắc theo ngữ cảnh công trình, độ bền, cảm giác thị giác và câu chuyện mà tác phẩm cần truyền tải.
+      </p>
+
+      <div class="surface-card overflow-hidden p-4 sm:p-5">
+        <div class="grid gap-4 sm:grid-cols-[1.05fr_0.95fr]">
+          <div class="overflow-hidden rounded-[1.5rem] [&_img]:h-full [&_img]:w-full [&_img]:object-cover">
+            <Picture
+              src={primaryImage}
+              alt={primaryAlt}
+              formats={["avif", "webp"]}
+              widths={[640, 960, 1280]}
+              sizes="(min-width: 1024px) 24vw, 100vw"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="grid gap-4">
+            <div class="overflow-hidden rounded-[1.5rem] [&_img]:h-full [&_img]:w-full [&_img]:object-cover">
+              <Picture
+                src={secondaryImage}
+                alt={secondaryAlt}
+                formats={["avif", "webp"]}
+                widths={[480, 720, 960]}
+                sizes="(min-width: 1024px) 18vw, 100vw"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="rounded-[1.5rem] border border-bronze-400/15 bg-bronze-400/8 p-5 text-sm leading-7 text-stone-700">
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-bronze-500">Ứng dụng phổ biến</p>
+              <ul class="mt-3 space-y-2">
+                {applications.slice(0, 3).map((application) => (
+                  <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-bronze-400"></span><span>{application}</span></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-5 lg:pt-16">
+      <div class="grid gap-5 sm:grid-cols-2">
+        {materials.map((material) => (
+          <article class="surface-card h-full p-6">
+            <h3 class="font-display text-3xl text-stone-950">{material.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-stone-700">{material.description}</p>
+            <p class="mt-3 text-sm leading-7 text-stone-500">{material.detail}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="surface-card p-6">
+        <div class="grid gap-6 md:grid-cols-2">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">Ứng dụng</p>
+            <ul class="mt-4 space-y-3 text-sm leading-7 text-stone-600">
+              {applications.map((application) => (
+                <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-stone-900"></span><span>{application}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">Quy trình hoàn thiện</p>
+            <ul class="mt-4 space-y-3 text-sm leading-7 text-stone-600">
+              {craftsmanshipHighlights.map((highlight) => (
+                <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-bronze-400"></span><span>{highlight}</span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

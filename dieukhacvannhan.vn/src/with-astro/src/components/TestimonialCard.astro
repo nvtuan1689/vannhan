@@ -1,0 +1,22 @@
+---
+interface Props {
+  name: string;
+  meta: string;
+  quote: string;
+}
+
+const { name, meta, quote } = Astro.props;
+const initial = name.slice(0, 1).toUpperCase();
+---
+
+<article class="surface-card h-full p-6 sm:p-7">
+  <p class="text-bronze-500">★★★★★</p>
+  <p class="mt-4 text-base leading-8 text-stone-700">“{quote}”</p>
+  <div class="mt-6 flex items-center gap-4">
+    <div class="flex size-12 items-center justify-center rounded-full bg-stone-900 text-sm font-semibold text-white">{initial}</div>
+    <div>
+      <h3 class="font-medium text-stone-950">{name}</h3>
+      <p class="text-sm text-stone-500">{meta}</p>
+    </div>
+  </div>
+</article>

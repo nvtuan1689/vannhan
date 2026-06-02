@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Điêu Khắc Văn Nhân</title>
+  <desc id="desc">Biểu tượng tối giản cho Điêu Khắc Văn Nhân</desc>
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f6f0e8"/>
+      <stop offset="100%" stop-color="#c8a979"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="#16130f"/>
+  <path d="M18 46V18h10.5c10.9 0 17 5.3 17 14s-6.1 14-17 14H18Zm8-7h2.3c6.2 0 9.2-2.2 9.2-7s-3-7-9.2-7H26v14Z" fill="url(#g)"/>
+  <path d="M49 16 32 48" stroke="#f6f0e8" stroke-width="3.2" stroke-linecap="round" opacity=".85"/>
+</svg>

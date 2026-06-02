@@ -1,0 +1,35 @@
+---
+import type { FAQItem } from '../data/homepage';
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section id="faq" class="section-space">
+  <div class="section-shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+    <div>
+      <span class="eyebrow">FAQ preview</span>
+      <h2 class="section-title max-w-2xl">Một vài câu hỏi khách hàng thường hỏi trước khi đặt tác phẩm.</h2>
+      <p class="section-copy max-w-xl">
+        Nếu bạn đang chuẩn bị triển khai công trình riêng, đây là những thông tin giúp rút ngắn quá trình trao đổi ban đầu.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {items.map((item) => (
+        <details class="surface-card group overflow-hidden p-0">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left text-base font-medium text-stone-900">
+            <span>{item.question}</span>
+            <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-stone-100 text-xl leading-none text-stone-500 transition group-open:rotate-45">+</span>
+          </summary>
+          <div class="border-t border-stone-100 px-6 py-5 text-sm leading-7 text-stone-600">
+            {item.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

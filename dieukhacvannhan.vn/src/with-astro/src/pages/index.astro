@@ -1,0 +1,235 @@
+---
+import { Picture } from 'astro:assets';
+import CTASection from '../components/CTASection.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import FAQPreview from '../components/FAQPreview.astro';
+import Footer from '../components/Footer.astro';
+import GallerySection from '../components/GallerySection.astro';
+import Hero from '../components/Hero.astro';
+import MaterialSection from '../components/MaterialSection.astro';
+import Navbar from '../components/Navbar.astro';
+import SculptureCard from '../components/SculptureCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+import {
+  applications,
+  brand,
+  categories,
+  craftsmanshipHighlights,
+  faqs,
+  featuredWorks,
+  galleryItems,
+  hero,
+  intro,
+  materialShowcase,
+  materials,
+  navLinks,
+  testimonials,
+  whyChooseUs,
+} from '../data/homepage';
+
+const title = 'Điêu Khắc Văn Nhân | Điêu khắc tượng nghệ thuật cao cấp';
+const description =
+  'Homepage Astro tĩnh cho Điêu Khắc Văn Nhân: thiết kế và chế tác tượng nghệ thuật, tượng công viên, manơcanh bảo tàng, phù điêu, tượng Phật và các dự án phục chế cao cấp.';
+const ogImage = Astro.site ? new URL(hero.image.src, Astro.site).toString() : hero.image.src;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: brand.name,
+    alternateName: brand.legacyName,
+    url: Astro.site?.toString() ?? 'https://dieukhacvannhan.vn',
+    logo: `${Astro.site?.toString() ?? 'https://dieukhacvannhan.vn'}favicon.svg`,
+    email: brand.email,
+    telephone: brand.phone,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'TP. Hồ Chí Minh',
+      addressCountry: 'VN',
+    },
+    sameAs: [brand.facebook, brand.zalo, brand.youtube],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: brand.name,
+    url: Astro.site?.toString() ?? 'https://dieukhacvannhan.vn',
+    inLanguage: 'vi-VN',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Điêu khắc tượng nghệ thuật theo yêu cầu',
+    provider: {
+      '@type': 'Organization',
+      name: brand.name,
+    },
+    areaServed: 'Việt Nam',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Danh mục dịch vụ điêu khắc',
+      itemListElement: categories.map((category) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: category.title,
+        },
+      })),
+    },
+  },
+];
+---
+
+<MainLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
+  <Navbar links={navLinks} phone={brand.phone} brandName={brand.name} tagline={brand.tagline} />
+
+  <main>
+    <Hero {...hero} />
+
+    <section id="gioi-thieu" class="section-space pt-6">
+      <div class="section-shell grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div class="surface-card overflow-hidden p-4 sm:p-5">
+          <div class="grid gap-4 sm:grid-cols-[1.08fr_0.92fr]">
+            <div class="overflow-hidden rounded-[1.75rem] [&_img]:h-full [&_img]:w-full [&_img]:object-cover">
+              <Picture
+                src={intro.image}
+                alt={intro.imageAlt}
+                formats={["avif", "webp"]}
+                widths={[640, 960, 1280]}
+                sizes="(min-width: 1024px) 28vw, 100vw"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="grid gap-4">
+              <div class="overflow-hidden rounded-[1.75rem] [&_img]:h-full [&_img]:w-full [&_img]:object-cover">
+                <Picture
+                  src={intro.accentImage}
+                  alt={intro.accentAlt}
+                  formats={["avif", "webp"]}
+                  widths={[480, 720, 960]}
+                  sizes="(min-width: 1024px) 20vw, 100vw"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="rounded-[1.75rem] border border-bronze-400/15 bg-bronze-400/10 p-5 text-sm leading-7 text-stone-700">
+                <p class="text-xs font-semibold uppercase tracking-[0.24em] text-bronze-500">Giá trị cốt lõi</p>
+                <p class="mt-3">Tinh giản trong trình bày, giàu chiều sâu trong tác phẩm, và luôn ưu tiên cảm xúc thị giác của không gian đặt tượng.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="eyebrow">Giới thiệu thương hiệu</span>
+          <h2 class="section-title">{intro.title}</h2>
+          {intro.paragraphs.map((paragraph) => (
+            <p class="section-copy !mt-4">{paragraph}</p>
+          ))}
+          <ul class="mt-8 grid gap-4">
+            {intro.bullets.map((bullet) => (
+              <li class="surface-card flex items-start gap-4 px-5 py-4 text-sm leading-7 text-stone-600">
+                <span class="mt-2 size-2 rounded-full bg-bronze-400"></span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="tac-pham" class="section-space">
+      <div class="section-shell">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <span class="eyebrow">Tác phẩm tiêu biểu</span>
+            <h2 class="section-title">Tượng, phù điêu và các công trình được trình bày như những tác phẩm gallery.</h2>
+          </div>
+          <p class="max-w-xl text-sm leading-7 text-stone-500 lg:text-right">
+            Mỗi hạng mục được chọn từ website cũ và viết lại theo định vị mới: nghệ thuật, cao cấp, điềm tĩnh và giàu bản sắc thủ công.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {featuredWorks.map((work) => (
+            <SculptureCard {...work} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="danh-muc" class="section-space pt-4">
+      <div class="section-shell">
+        <span class="eyebrow">Danh mục sản phẩm</span>
+        <h2 class="section-title">Các nhóm dịch vụ và sản phẩm được tổ chức rõ ràng, dễ mở rộng về sau.</h2>
+        <p class="section-copy">
+          Trang chủ được thiết kế để tôn vinh hình ảnh và giúp khách hàng cảm nhận ngay chiều sâu chuyên môn của xưởng, từ tượng công viên đến các dự án nội ngoại thất nghệ thuật.
+        </p>
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {categories.map((category, index) => (
+            <CategoryCard {...category} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <MaterialSection
+      materials={materials}
+      applications={applications}
+      craftsmanshipHighlights={craftsmanshipHighlights}
+      primaryImage={materialShowcase.primaryImage}
+      primaryAlt={materialShowcase.primaryAlt}
+      secondaryImage={materialShowcase.secondaryImage}
+      secondaryAlt={materialShowcase.secondaryAlt}
+    />
+
+    <GallerySection items={galleryItems} />
+
+    <section id="ly-do-chon" class="section-space pt-4">
+      <div class="section-shell">
+        <div class="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+          <div>
+            <span class="eyebrow">Vì sao chọn chúng tôi</span>
+            <h2 class="section-title">Một xưởng điêu khắc vận hành như studio thiết kế, nhưng vẫn giữ được đôi tay nghề thủ công.</h2>
+          </div>
+          <div class="grid gap-5 sm:grid-cols-2">
+            {whyChooseUs.map((item) => (
+              <article class="surface-card h-full p-6">
+                <h3 class="font-display text-3xl text-stone-950">{item.title}</h3>
+                <p class="mt-4 text-sm leading-7 text-stone-600">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cam-nhan" class="section-space pt-4">
+      <div class="section-shell">
+        <span class="eyebrow">Cảm nhận khách hàng</span>
+        <h2 class="section-title">Những phản hồi tích cực đến từ các dự án đã hoàn thiện.</h2>
+        <div class="mt-10 grid gap-5 lg:grid-cols-3">
+          {testimonials.map((testimonial) => (
+            <TestimonialCard {...testimonial} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <FAQPreview items={faqs} />
+
+    <CTASection phone={brand.phone} email={brand.email} zalo={brand.zalo} location={brand.location} hours={brand.hours} />
+  </main>
+
+  <Footer
+    brandName={brand.name}
+    description="Điêu Khắc Văn Nhân chuyên thiết kế và chế tác tượng nghệ thuật, công trình cảnh quan, phù điêu, tượng Phật và các dự án phục chế theo yêu cầu."
+    phone={brand.phone}
+    email={brand.email}
+    links={navLinks}
+    facebook={brand.facebook}
+    zalo={brand.zalo}
+    youtube={brand.youtube}
+  />
+</MainLayout>

@@ -1,0 +1,42 @@
+---
+import { Picture } from 'astro:assets';
+import type { GalleryItem } from '../data/homepage';
+
+interface Props {
+  items: GalleryItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section id="thu-vien" class="section-space">
+  <div class="section-shell">
+    <span class="eyebrow">Sculpture gallery</span>
+    <h2 class="section-title">Thư viện tác phẩm mang cảm giác như một bộ sưu tập gallery.</h2>
+    <p class="section-copy">
+      Hình ảnh được tuyển chọn từ website cũ để giữ đúng tinh thần thương hiệu, sau đó trình bày lại theo hướng thoáng, tinh giản và tập trung vào chất lượng của từng tác phẩm.
+    </p>
+
+    <div class="mt-10 columns-1 gap-5 md:columns-2 xl:columns-3">
+      {items.map((item) => (
+        <article class="surface-card mb-5 break-inside-avoid overflow-hidden p-3">
+          <div class={`overflow-hidden rounded-[1.5rem] [&_img]:h-full [&_img]:w-full [&_img]:object-cover ${item.tall ? '[&_img]:aspect-[4/5]' : '[&_img]:aspect-[5/4]'}`}>
+            <Picture
+              src={item.image}
+              alt={item.alt}
+              formats={["avif", "webp"]}
+              widths={[480, 768, 1200]}
+              sizes="(min-width: 1280px) 28vw, (min-width: 768px) 46vw, 100vw"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="px-3 pb-3 pt-4">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-bronze-500">{item.category}</p>
+            <h3 class="mt-2 font-display text-2xl text-stone-950">{item.title}</h3>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

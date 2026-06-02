@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  index: number;
+}
+
+const { title, description, index } = Astro.props;
+const order = String(index + 1).padStart(2, '0');
+---
+
+<article class="surface-card h-full p-6">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">Danh mục</p>
+      <h3 class="mt-3 font-display text-3xl capitalize text-stone-950">{title}</h3>
+    </div>
+    <span class="font-display text-3xl text-bronze-400/80">{order}</span>
+  </div>
+  <p class="mt-4 text-sm leading-7 text-stone-600">{description}</p>
+</article>

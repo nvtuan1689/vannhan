@@ -1,0 +1,12 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "exclude": [
+    "draft-tuongphatvannhan",
+    "dieukhacvannhan.vn",
+    "dist",
+    "node_modules"
+  ]
+}

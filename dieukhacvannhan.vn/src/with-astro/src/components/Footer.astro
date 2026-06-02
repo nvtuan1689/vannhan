@@ -1,0 +1,52 @@
+---
+import type { NavLink } from '../data/homepage';
+
+interface Props {
+  brandName: string;
+  description: string;
+  phone: string;
+  email: string;
+  links: NavLink[];
+  facebook: string;
+  zalo: string;
+  youtube: string;
+}
+
+const { brandName, description, phone, email, links, facebook, zalo, youtube } = Astro.props;
+---
+
+<footer class="px-4 pb-8 pt-12 sm:px-6 lg:px-8">
+  <div class="section-shell surface-card px-6 py-8 sm:px-8 lg:px-10">
+    <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr_0.8fr]">
+      <div>
+        <div class="font-display text-4xl text-stone-950">{brandName}</div>
+        <p class="mt-4 max-w-xl text-sm leading-7 text-stone-600">{description}</p>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">Điều hướng</p>
+        <ul class="mt-4 space-y-3 text-sm text-stone-600">
+          {links.map((link) => (
+            <li><a href={link.href} class="hover:text-stone-950">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-stone-400">Kết nối</p>
+        <ul class="mt-4 space-y-3 text-sm text-stone-600">
+          <li><a href={`tel:${phone.replace(/\s+/g, '')}`} class="hover:text-stone-950">{phone}</a></li>
+          <li><a href={`mailto:${email}`} class="hover:text-stone-950">{email}</a></li>
+          <li><a href={facebook} target="_blank" rel="noreferrer" class="hover:text-stone-950">Facebook</a></li>
+          <li><a href={zalo} target="_blank" rel="noreferrer" class="hover:text-stone-950">Zalo</a></li>
+          <li><a href={youtube} target="_blank" rel="noreferrer" class="hover:text-stone-950">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 flex flex-col gap-3 border-t border-stone-200 pt-5 text-sm text-stone-500 sm:flex-row sm:items-center sm:justify-between">
+      <p>© 2026 {brandName}. Trình bày lại từ di sản thương hiệu cũ theo hướng hiện đại và tĩnh.</p>
+      <a href="#top" class="hover:text-stone-900">Lên đầu trang ↑</a>
+    </div>
+  </div>
+</footer>
